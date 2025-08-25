@@ -1,23 +1,28 @@
 import React from 'react';
-import youtubeSearch from '../services/youtube-api';
-import { useState, useEffect } from 'react';
+import youtubeSearch from '../services/youtube-api.js';
+import { useEffect } from 'react';
 
 // import our new SearchBar componenbt
 import SearchBar from './search_bar.jsx';
 import VideoList from './video_list.jsx';
 import VideoDetail from './video_detail.jsx';
 
+import useStore from '../store';
+
+
 // import debounce from 'lodash.debounce';
 
-function App(props) {
+function Youtube(props) {
 
-const [videos, setVideos] = useState([]);
-const [selectedVideo, setSelected] = useState(null);
+// const [videos, setVideos] = useState([]);
+// const [selectedVideo, setSelected] = useState(null);
+
+  const setVideos = useStore(({ videoSlice }) => (videoSlice.setVideos));
+
 
 const search = (text) => {
     youtubeSearch(text).then((result) => {
       setVideos(result);
-      setSelected(result[0]);
       console.log(result);
     });
   };
@@ -36,11 +41,11 @@ useEffect(() => {
     <div>
       <SearchBar onSearchChange={search}/>
       <div id="video-section">
-      <VideoDetail video={selectedVideo} />
-      <VideoList onVideoSelect={(selection) => setSelected(selection)} videos={videos} />
+      <VideoDetail />
+      <VideoList />
         </div>
     </div>
   );
 };
 
-export default App;
+export default Youtube;

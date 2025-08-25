@@ -1,6 +1,10 @@
 import React from 'react';
+import useStore from '../store';
 
-const VideoDetail = ({ video }) => {
+const VideoDetail = () => {
+
+  const video = useStore((state) => state.videoSlice.selected);
+
   console.log(video);
 
     // Here's a snippet that'll help

@@ -6,6 +6,7 @@ import { useParams } from 'react-router';
 import './store';
 import Counter from './components/counter.jsx';
 import Controls from './components/controls.jsx';
+import Youtube from './components/youtube.jsx';
 
 
 const About = (props) => {
@@ -45,7 +46,7 @@ const Nav = (props) => {
   );
 };
 
-const App = (props) => {
+const AppStarter = (props) => {
   return (
     <BrowserRouter>
       <div>
@@ -64,4 +65,9 @@ const App = (props) => {
 
 
 const root = createRoot(document.getElementById('main'));
-root.render(<App />);
+root.render(
+  <div>
+    <AppStarter />
+    <Youtube />
+  </div>
+);
